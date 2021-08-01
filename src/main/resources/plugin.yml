@@ -1,0 +1,11 @@
+name: TogglePvP
+version: ${project.version}
+main: net.ddns.foxsquad.togglepvp.Main
+api-version: 1.17
+authors: [ Rooot ]
+description: A very simple plugin to toggle PvP.
+depend: [ WorldGuard ]
+commands:
+  pvp:
+    description: Toggles PvP
+    usage: /<command>
