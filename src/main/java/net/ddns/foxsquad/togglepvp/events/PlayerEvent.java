@@ -3,7 +3,7 @@ package net.ddns.foxsquad.togglepvp.events;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.protection.events.DisallowedPVPEvent;
+import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -31,12 +31,13 @@ public class PlayerEvent implements Listener {
             boolean force_allow1 = false;
 
             for (ProtectedRegion region : getRegions(loc0)) {
-                if(region.getFlag(Main.FORCE_PVP_FLAG) == StateFlag.State.ALLOW) {
+                if(region.getFlag(Flags.PVP) == StateFlag.State.ALLOW) {
                     force_allow0 = true;
                 }
             }
+
             for (ProtectedRegion region : getRegions(loc1)) {
-                if(region.getFlag(Main.FORCE_PVP_FLAG) == StateFlag.State.ALLOW) {
+                if(region.getFlag(Flags.PVP) == StateFlag.State.ALLOW) {
                     force_allow1 = true;
                 }
             }
@@ -62,11 +63,6 @@ public class PlayerEvent implements Listener {
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler
-    public void onDisallowedWGPvP(DisallowedPVPEvent event) {
-        event.setCancelled(true); // we have our own logic
     }
 
     private Set<ProtectedRegion> getRegions(@Nonnull Location location) {
